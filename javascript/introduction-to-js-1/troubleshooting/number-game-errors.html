@@ -41,74 +41,121 @@
 </body>
 
 <script>
-  let randomNumber = Math.floor(Math.random()) + 1;
+  //creates a variable with a random number > 0
+  let randomNumber = Math.floor(Math.random()) + 1; 
 
-  const guesses = document.querySelector('.guesses');
+  //Creates variables for storing the different html elements in the DOM
+  const guesses = document.querySelector('.guesses'); 
   const lastResult = document.querySelector('.lastResult');
   const lowOrHi = document.querySelector('lowOrHi');
   const guessSubmit = document.querySelector('.guessSubmit');
   const guessField = document.querySelector('.guessField');
 
+  //initializes a variable that stores how many guesses have been made
   let guessCount = 1;
+  //empty variable?
   let resetButton;
 
+  //creates a function for checking if guess is correct
   function checkGuess() {
 
+    //creates a variable for storing the users inputted guess
     const userGuess = Number(guessField.value);
+    //checks if this is the first guess
     if(guessCount === 1) {
+      //creates an empty field of previous guesses
       guesses.textContent = 'Previous guesses: ';
     }
+    //adds the users guess to the field of previous guesses
     guesses.textContent += userGuess + ' ';
 
+    //checks if the users guess is equal to the value of the randomNumber variable
     if(userGuess === randomNumber) {
+      //displays a "you are winner" text message
       lastResult.textContent = 'Congratulations! You got it right!';
+      //sets the background color of the winner message to green
       lastResult.style.backgroundColor = 'green';
+      //empties the html element that shows if the guess is low or high
       lowOrHi.textContent = '';
+      //runs the function called "setGameOver"
       setGameOver();
+      //check if this guess is the users 10th guess
     } else if(guessCount === 10) {
+      //displays a "game over" text message
       lastResult.textContent = '!!!GAME OVER!!!';
+      //runs the function called "setGameOver"
       setGameOver();
     } else {
+      //displays a text message informing the user the guess is incorrect
       lastResult.textContent = 'Wrong!';
+      //sets the background color to red
       lastResult.style.backgroundColor = 'red';
+      //checks if the users guess is lower than the value of the randomNumber variable
       if(userGuess < randomNumber) {
+        //displays a text message informing the user the guess is lower
         lowOrHi.textContent = 'Last guess was too low!';
+      //checks if the users guess is higher than the value of the randomNumber variable
       } else if(userGuess > randomNumber) {
+        //displays a text message informing the user the guess is higher
         lowOrHi.textContent = 'Last guess was too high!';
       }
     }
-
+    //increments the value of the guessCount variable
     guessCount++;
+    //empties the input form for guesses
     guessField.value = '';
+    //sets the browsers focus to the input form for guesses
     guessField.focus();
   }
+  //listen for when the user clicks on the "submit guess" button, and runs the checkGuess function
   guessSubmit.addeventListener('click', checkGuess);
 
+  //creates a function called setGameOver
   function setGameOver() {
+    //removes the input form for guesses
 	  guessField.disabled = true;
+    //removes the "submit guess" button
 	  guessSubmit.disabled = true;
+    //creates a button called resetButton
+    //shouldnt this be "let resetButton = ..."?
 	  resetButton = document.createElement('button');
+    //makes the text of the button "start new game"
+    //shouldnt this be "let resetButton.text.Content = ..."?
 	  resetButton.textContent = 'Start new game';
+    //adds the button to the html document
 	  document.body.appendChild(resetButton);
+    //wait for user to click on the resetbutton and then run the resetGame function
 	  resetButton.addeventListener('click', resetGame);
   }
 
+  //creates a function called resetGame
   function resetGame() {
+    //initalize the guesscount variable, setting it to 1
 	  guessCount = 1;
 
+    //creates a variable storing the result parameters i.e. previous guesses and results
     const resetParas = document.querySelectorAll('.resultParas p');
+    //creates a for loop indexing over all the parameters in resetParas
     for (const resetPara of resetParas) {
+      //sets the current parameter in the index to be an empty string
       resetPara.textContent = '';
     }
+    //removes the resetButton button from the html document
 	  resetButton.parentNode.removeChild(resetButton);
 
+    //sets the variable deciding if the input form for guesses is disabled to false
 	  guessField.disabled = false;
+    //sets the variable deciding if the button for submitting guesses is disabled to false
 	  guessSubmit.disabled = false;
+    //empties out the input form for guesses
 	  guessField.value = '';
+    //sets the browsers focus to the input form for guesses
 	  guessField.focus();
 
+    //sets the background color of the html document to white
 	  lastResult.style.backgroundColor = 'white';
 
+    //set the randomNumber variable to a random number > 0
 	  randomNumber = Math.floor(Math.random()) + 1;
   }
 </script>
