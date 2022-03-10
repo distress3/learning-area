@@ -42,7 +42,7 @@
 
 <script>
   //creates a variable with a random number > 0
-  let randomNumber = Math.floor(Math.random()) + 1; 
+  let randomNumber = Math.floor(Math.random() * 100) + 1;
 
   //Creates variables for storing the different html elements in the DOM
   const guesses = document.querySelector('.guesses'); 
@@ -157,7 +157,7 @@
 	  lastResult.style.backgroundColor = 'white';
 
     //set the randomNumber variable to a random number > 0
-	  randomNumber = Math.floor(Math.random()) + 1;
+	  randomNumber = Math.floor(Math.random() * 100) + 1;
   }
 </script>
 </html>
