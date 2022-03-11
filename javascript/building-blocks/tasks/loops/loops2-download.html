@@ -41,7 +41,24 @@
     ]
 
     // Add your code here
+    let searchTerm = prompt('Name 2 search 4');
+    let phonebookLength = phonebook.length;
+    console.log(phonebookLength);
+    let nameFound = false;
+    let i = 0;
+    while (i <= phonebookLength) {
+      console.log(i);
+      if (phonebook[i].name == searchTerm) {
+        para.textContent += phonebook[i].name + ' ' + phonebook[i].number;
+        nameFound = true;
+        break;
+      }
+      i++;
+    }
 
+    if (nameFound === false) {
+      para.textContent += 'The name you searched for could not be found.'
+    }
     // Don't edit the code below here!
     const section = document.querySelector('section');
     section.appendChild(para);
