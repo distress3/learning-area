@@ -41,7 +41,16 @@
 
 
     // Add your code here
-
+    //initializer
+    let j = 1
+    do {
+      j++
+      if (isPrime(j) === true) {
+        para.textContent += j + ', '
+      } else {
+        continue;
+      }
+    } while (j < i) //needs a condition
 
     // Don't edit the code below here!
     const section = document.querySelector('section');
